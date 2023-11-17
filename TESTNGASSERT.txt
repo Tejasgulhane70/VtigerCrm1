@@ -1,0 +1,26 @@
+if u want to fai; the testscript
+
+failtestscript : assert 
+
+ASSERT/ASSERTION/CHECK POINT
+
+FAIL THE TESTSCRIPT OF TESTNG CLASS 
+IT HAS TWO TYPES 
+1>Hard assert : 1. work  in condition 
+2.static method use
+3.thay are use in mandatory field
+4.if condition is not match or satisfied next line not executed
+
+3.METHODS ARE THERE 1.ASSERTEQUELS()
+                    2.ASSERTTRUE()
+                    3.ASSERTFALSE()
+
+2.> SOFT ASSERT
+3.NON MANDATORY FIELD
+4.if comes to the soft asssert if cond is not satisfied next line will execute
+
+
+
+skip the testscript : depends on method
+
+HOW TO SKIPPED TESTCASES.
