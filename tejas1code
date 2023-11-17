@@ -1,0 +1,90 @@
+import java.time.Duration;
+import java.util.Set;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+
+public class Contact_plus_Nwindow 
+{
+	
+	   
+	    public static void main(String[] args) throws InterruptedException {
+			
+		
+	 	
+	 	  ChromeDriver driver = new ChromeDriver();
+	 	  driver.manage().window().maximize();
+	 	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	 	  
+	 	  driver.get("http://localhost:8888/index.php?action=Login&module=Users");
+	 	  
+	 	  driver.findElement(By.name("user_name")).sendKeys("admin");
+		  driver.findElement(By.name("user_password")).sendKeys("Tejas@123");
+		  
+		  driver.findElement(By.id("submitButton")).click();
+		  
+		  driver.findElement(By.xpath("//a[text()='Contacts']")).click();
+			
+	      driver.findElement(By.xpath("//img[@title='Create Contact...']")).click();
+	 	  
+	      
+	      driver.findElement(By.xpath("(//img[@title='Select'])[1]")).click();
+	      
+	      
+	       
+	     Set<String> ids = driver.getWindowHandles();
+	     System.out.println(ids);
+	     
+	     //to transfer the control of parent to child
+	     for(String allids : ids)
+	     {
+	    	 
+	    	//System.out.println(allids);
+	    	 //print both tile parent and child
+	    //	String alltitle = driver.getTitle();  //print only parent title 2 times 
+	      //  System.out.println(alltitle);
+	    	 
+	    	 
+//	    	 String alltitle = driver.switchTo().window(allids).getTitle();
+//	    	 System.out.println(alltitle);  //get only one title parent instead of this go to getcurrenturl
+	    	 
+	    	 
+	    	 String allurl = driver.switchTo().window(allids).getCurrentUrl();
+	    	 System.out.println(allurl); 	 
+	     }
+	     
+	     //  driver.close();  //check the control 
+	    	
+	     
+        driver.findElement(By.id("search_txt")).sendKeys("Qspider");
+	     
+	     driver.findElement(By.name("search")).click();
+	     
+	     Thread.sleep(2000);
+	     driver.findElement(By.xpath("//a[text()='Qspider']")).click();
+	     Thread.sleep(4000);
+       //transfer the control of child to parent
+     
+	     for(String allid: ids)
+     {
+        	 String allurl = driver.switchTo().window(allid).getCurrentUrl();
+        	 System.out.println(allurl);  
+	    	 
+	    	 String parenturl="http://localhost:8888/index.php?module=Contacts&action=EditView&return_action=DetailView&parenttab=Marketing";
+	    	 	
+	    	 if(allurl.contains(parenturl))
+	    	 {
+    		 driver.close();
+	    		 
+	    	 }
+	     }
+	     
+	     
+	     
+	 	  
+	  
+	 	  
+	 }
+
+}
